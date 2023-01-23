@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block body %}
+
+     <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                {% for order in orders %}
+                    <div class="row gx-4 gx-lg-5 align-items-center mt-3">
+                        <div class="col-md-6">
+                            {% if order.product.image%}
+                                <img class="card-img-top mb-5 mb-md-0" src="{{ order.product.image.url }}" height="300px" width="200px" alt="..." /></div>
+                            {% else %}
+                                <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+                            {% endif %}
+                        <div class="col-md-6">
+{#                            <div class="small mb-1">{{ order.status}}</div>#}
+                            <h1 class="display-5 fw-bolder">{{ order.product.name}}</h1>
+                            <div class="fs-5 mb-5">
+{#                                <span class="text-decoration-line-through"> Price </span>#}
+                                <span>$ {{order.product.price}}</span>
+                            </div>
+                            <p class="lead">Date:{{ order.date }}</p>
+                            <div class="d-flex">
+                                <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                                {% if order.status == 'cancelled' %}
+
+                                    <span class="text-danger">  Cancelled </span>
+
+                                    {% else %}
+
+                                    <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{% url 'cancel-order' order.id %}">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    Cancel Order
+                                </a>
+
+
+                                {% endif %}
+                            </div>
+                    </div>
+                </div>
+                    <hr class="mt-2 m-2">
+                {% endfor %}
+            </div>
+        </section>
+
+{% endblock %}

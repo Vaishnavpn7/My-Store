@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{%load static %}
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Animated Login Form | CodingNepal</title>
+    <link rel="stylesheet" href="{%static 'css/loginstyle.css' %}">
+  </head>
+  <body>
+    <div class="center">
+      <h1>Login!</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+
+            {%if messages%}
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-4">
+                {{form.errors}}
+              </div>
+              <div class="col-4"></div>
+            </div>
+            {%for msg in messages%}
+
+            {{msg}}
+
+
+
+            {%endfor%}
+
+            {%endif%}
+          </div>
+        </div>
+      </div>
+      <form method="post">
+        {%csrf_token%}
+        <div class="txt_field">
+          <input type="text" name="username" id="id_username" required>
+          <span></span>
+          <label>Username</label>
+        </div>
+        <div class="txt_field">
+          <input type="password" name="password" id="id_password" required>
+          <span></span>
+          <label>Password</label>
+        </div>
+        <div class="pass">Forgot Password?</div>
+        <input type="submit" value="Login">
+        <div class="signup_link">
+          Not a member? <a href="{%url 'register-cus'%}">Signup</a>
+        </div>
+      </form>
+    </div>
+
+  </body>
+</html>

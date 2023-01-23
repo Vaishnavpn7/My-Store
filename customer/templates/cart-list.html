@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block body %}
+
+     <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                {% for cart in carts %}
+                    <div class="row gx-4 gx-lg-5 align-items-center mt-3">
+                        <div class="col-md-6">
+                            {% if cart.product.image %}
+                                <img class="card-img-top mb-5 mb-md-0" src="{{ cart.product.image.url }}" height="300px" width="200px" alt="..." /></div>
+                            {% else %}
+                                <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
+                            {% endif %}
+                        <div class="col-md-6">
+                            <div class="small mb-1">{{ cart.product.id}}</div>
+                            <h1 class="display-5 fw-bolder">{{ cart.product.name}}</h1>
+                            <div class="fs-5 mb-5">
+                                <span class="text-decoration-line-through">5000</span>
+                                <span>{{cart.product.price}}</span>
+                            </div>
+                            <p class="lead">Date:{{ cart.date }}</p>
+                            <div class="d-flex">
+                                <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                                <a class="btn btn-outline-dark flex-shrink-0" type="button" href="{% url 'place-order' cart.id cart.product.id %}">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    Buy now
+                                </a>
+                            </div>
+                    </div>
+                </div>
+                    <hr class="mt-2 m-2">
+                {% endfor %}
+            </div>
+        </section>
+
+{% endblock %}
