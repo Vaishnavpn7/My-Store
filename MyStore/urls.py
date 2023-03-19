@@ -9,32 +9,32 @@ from drf_yasg import openapi
 from django.conf import settings
 from django.conf.urls.static import static
 
-# schema_view = get_schema_view(
-#     openapi.Info(
-#         title="Snippets API",
-#         default_version='v1',
-#         description="Test description",
-#         terms_of_service="https://www.google.com/policies/terms/",
-#         contact=openapi.Contact(email="contact@snippets.local"),
-#         license=openapi.License(name="BSD License"),
-#     ),
-#     public=True,
-#     permission_classes=[permissions.AllowAny],
-# )
-#
-# router = DefaultRouter()
-# router.register("api/products", views.ProductViewViewset, basename='products')
-# router.register('user', views.Userview, basename='user')
-# router.register('model/products', views.ProductViewViewsetmodel, basename='products')
-# router.register('carts', views.Cartsview, basename='carts')
-# router.register('review', views.ReviewView, basename='review')
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Snippets API",
+        default_version='v1',
+        description="Test description",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="contact@snippets.local"),
+        license=openapi.License(name="BSD License"),
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny],
+)
+
+router = DefaultRouter()
+router.register("api/products", views.ProductViewViewset, basename='products')
+router.register('user', views.Userview, basename='user')
+router.register('model/products', views.ProductViewViewsetmodel, basename='products')
+router.register('carts', views.Cartsview, basename='carts')
+router.register('review', views.ReviewView, basename='review')
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('products/', views.ProductView.as_view()),
                   # path('products/<int:id>', views.ProductdetailsView.as_view()),
                   path('token/', ObtainAuthToken.as_view()),
                   path('owner/', include('owner.urls')),
-                  # path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+                  path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
                   path('', include('customer.urls')),
 
-              ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + router.urls

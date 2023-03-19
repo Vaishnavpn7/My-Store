@@ -18,7 +18,7 @@
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
-                    {% if product.image %}
+                    {% if product.image.url %}
 
                         <img class="card-img-top" src="{{product.image.url}}" alt="..." />
 
@@ -46,6 +46,4 @@
         </div>
     </div>
 </section>
-
-
 {%endblock%}
